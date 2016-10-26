@@ -11,6 +11,12 @@ Add this script to your html page:
 </head>
 ```
 
+Material-ui is required:
+
+```
+  npm install material-ui
+```
+
 ```
   npm install googlePlaceAutocomplete
 ```

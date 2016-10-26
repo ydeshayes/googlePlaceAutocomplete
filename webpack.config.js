@@ -24,6 +24,10 @@ var config = {
     libraryTarget: 'umd',
     umdNamedDefine: true
   },
+  externals: {
+    'react': 'react',
+    'material-ui': 'material-ui'
+  },
   module: {
     loaders: [
       {

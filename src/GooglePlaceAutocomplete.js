@@ -1,7 +1,7 @@
 /* global google*/
 
-import AutoComplete from 'material-ui/AutoComplete';
 import React, { Component } from 'react';
+import { AutoComplete } from 'material-ui';
 
 class GooglePlaceAutocomplete extends Component {
   constructor(props) {
