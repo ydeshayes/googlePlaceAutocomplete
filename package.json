@@ -1,8 +1,8 @@
 {
-  "name": "googlePlaceAutocomplete",
+  "name": "material-ui-places",
   "version": "1.0.3",
   "description": "Wrapper on top of the material-ui AutoComplete component that use google place api",
-  "main": "lib/GooglePlaceAutocomplete.min.js",
+  "main": "lib/material-ui-places.min.js",
   "scripts": {
     "build": "webpack --mode=build",
     "dev": "webpack --progress --colors --watch --mode=dev",

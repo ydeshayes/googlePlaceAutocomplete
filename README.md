@@ -1,4 +1,4 @@
-# GooglePlaceAutocomplete component for ReactJS
+# material-ui-places component for ReactJS
 
 Wrapper on top of the material-ui AutoComplete component that use google place api
 
@@ -18,7 +18,7 @@ Material-ui is required:
 ```
 
 ```
-  npm install googlePlaceAutocomplete
+  npm install material-ui-places
 ```
 
 ## Features
