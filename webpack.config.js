@@ -1,13 +1,13 @@
 var webpack = require('webpack');
 var UglifyJsPlugin = webpack.optimize.UglifyJsPlugin;
 var path = require('path');
-var env = require('yargs').argv.mode;
+var env = require('yargs').argv.env;
 
 var libraryName = 'material-ui-places';
 
 var plugins = [], outputFile;
 
-if (env === 'build') {
+if (env.mode === 'build') {
   plugins.push(new UglifyJsPlugin({ minimize: true }));
   outputFile = libraryName + '.min.js';
 } else {
@@ -16,7 +16,6 @@ if (env === 'build') {
 
 var config = {
   entry: __dirname + '/src/index.js',
-  devtool: 'source-map',
   output: {
     path: __dirname + '/lib',
     filename: outputFile,
@@ -29,22 +28,24 @@ var config = {
     'material-ui': 'material-ui'
   },
   module: {
-    loaders: [
+    rules: [
       {
         test: /(\.jsx|\.js)$/,
-        loader: 'babel',
+        use: 'babel-loader',
         exclude: /(node_modules|bower_components)/
       },
       {
         test: /(\.jsx|\.js)$/,
-        loader: "eslint-loader",
+        use: "eslint-loader",
         exclude: /node_modules/
       }
     ]
   },
   resolve: {
-    root: path.resolve('./src'),
-    extensions: ['', '.js']
+    modules: [
+      path.resolve('./src')
+    ],
+    extensions: ['.js']
   },
   plugins: plugins
 };

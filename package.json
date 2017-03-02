@@ -4,7 +4,7 @@
   "description": "Wrapper on top of the material-ui AutoComplete component that use google place api",
   "main": "lib/material-ui-places.min.js",
   "scripts": {
-    "build": "webpack --mode=build",
+    "build": "webpack --env.mode=build",
     "dev": "webpack --progress --colors --watch --mode=dev",
     "test": "mocha ./test/.setup.js ./test/**/*.spec.js"
   },
@@ -31,7 +31,7 @@
     "react-addons-test-utils": "^15.3.2",
     "react-dom": "^15.3.2",
     "sinon": "^1.17.6",
-    "webpack": "1.12.9",
+    "webpack": "2.2.1",
     "yargs": "6.6.0"
   },
   "repository": {
