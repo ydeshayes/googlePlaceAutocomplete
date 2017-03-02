@@ -6,16 +6,11 @@ import { AutoComplete } from 'material-ui';
 class GooglePlaceAutocomplete extends Component {
   constructor(props) {
     super(props);
+    this.autocompleteService = new google.maps.places.AutocompleteService();
     this.state = {
       dataSource: [],
       data: []
     };
-  }
-
-  componentDidMount() {
-    this.setState({
-      autocompleteService: new google.maps.places.AutocompleteService()
-    });
   }
 
   componentWillReceiveProps(nextProps) {
@@ -36,16 +31,34 @@ class GooglePlaceAutocomplete extends Component {
     });
   }
 
+  getBounds() {
+    if(!this.props.bounds || (!this.props.bounds.ne && !this.props.bounds.south)) {
+      return undefined;
+    }
+
+    if(this.props.bounds.ne && this.props.bounds.sw) {
+      return new google.maps.LatLngBounds(this.props.bounds.sw, this.props.bounds.ne);
+    }
+
+    return {
+      ...this.props.bounds
+    };
+  }
+
   onUpdateInput(searchText, dataSource) {
-    if (!searchText.length || !this.state.autocompleteService) {
+    if (!searchText.length || !this.autocompleteService) {
       return false;
     }
 
-    this.state.autocompleteService.getPlacePredictions({
+    let request = {
       input: searchText,
-      location: this.props.location || new google.maps.LatLng(0, 0),
-      radius: this.props.radius || 0
-    }, data => this.updateDatasource(data));
+      location: new google.maps.LatLng(this.props.location.lat, this.props.location.lng),
+      radius: this.props.radius,
+      types: this.props.types,
+      bounds: this.getBounds()
+    };
+
+    this.autocompleteService.getPlacePredictions(request, data => this.updateDatasource(data));
   }
 
   onNewRequest(searchText, index) {
@@ -62,13 +75,17 @@ class GooglePlaceAutocomplete extends Component {
   }
 
   render() {
+    const {location, radius, bounds, ...autoCompleteProps} = this.props; // eslint-disable-line no-unused-vars
+
     return (
-      <AutoComplete {...this.props}
-                    ref={this.props.getRef}
-                    filter={AutoComplete.noFilter}
-                    onUpdateInput={this.onInputChange.bind(this)}
-                    dataSource={this.state.dataSource}
-                    onNewRequest={this.onNewRequest.bind(this)}/>
+      <AutoComplete
+        {...autoCompleteProps}
+        ref={this.props.getRef}
+        filter={this.props.filter}
+        onUpdateInput={this.onInputChange.bind(this)}
+        dataSource={this.state.dataSource}
+        onNewRequest={this.onNewRequest.bind(this)}
+      />
     );
   }
 }
@@ -76,8 +93,17 @@ class GooglePlaceAutocomplete extends Component {
 GooglePlaceAutocomplete.propTypes = {
   location: React.PropTypes.object,
   radius: React.PropTypes.number,
-  onNewRequest: React.PropTypes.func,
-  getRef: React.PropTypes.func
+  onNewRequest: React.PropTypes.func.isRequired,
+  onChange: React.PropTypes.func.isRequired,
+  getRef: React.PropTypes.func,
+  types: React.PropTypes.arrayOf(React.PropTypes.string),
+  bounds: React.PropTypes.object
+};
+
+GooglePlaceAutocomplete.defaultProps = {
+  location: {lat: 0, lng: 0},
+  radius: 0,
+  filter: AutoComplete.noFilter
 };
 
 export default GooglePlaceAutocomplete;

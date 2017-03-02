@@ -29,18 +29,29 @@ Material-ui is required:
 
 
 ```jsx
-<GooglePlaceAutocomplete searchText={'paris'}
-                         onChange={onAutoCompleteInputChangeFct}
-                         onNewRequest={onClickLocationFct}
-                         name={'location'}
+<GooglePlaceAutocomplete
+  searchText={'paris'}
+  onChange={onAutoCompleteInputChangeFct}
+  onNewRequest={onClickLocationFct}
+  name={'location'}
 />
 ```
 ### Props:
 
-* Same as AutoComplete material-ui component (http://www.material-ui.com/#/components/auto-complete)
+* [Same as AutoComplete material-ui component](http://www.material-ui.com/#/components/auto-complete)
 
 * onNewRequest: function -> (selectedData, searchedText, selectedDataIndex)
 
+* location: {lat: latitude, lng: longitude}, default: ```{lat: 0, lng: 0}``` see [LatLng](https://developers.google.com/maps/documentation/javascript/reference?hl=fr#LatLng)
+
+* radius: number, default: ```0```
+
+* bounds: object, ```{sw: southWest, ne: northEast}``` for [LatLngBounds](https://developers.google.com/maps/documentation/javascript/reference?hl=fr#LatLngBounds) or ```{south: south, east: east, north: north, west: west}``` for [LatLngBoundsLiteral](https://developers.google.com/maps/documentation/javascript/reference?hl=fr#LatLngBoundsLiteral)  default: ```undefined```
+
+* getRef: function -> (ref)
+
+* types: Array, ```
+The types of predictions to be returned. Four types are supported: 'establishment' for businesses, 'geocode' for addresses, '(regions)' for administrative regions and '(cities)' for localities. If nothing is specified, all types are returned.```, default ```undefined```
 
 ## Development
 
