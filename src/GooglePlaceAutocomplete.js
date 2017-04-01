@@ -25,6 +25,9 @@ class GooglePlaceAutocomplete extends Component {
       return false;
     }
 
+    if(this.state.data) {
+      this.previousData = { ...this.state.data };
+    }
     this.setState({
       dataSource: data.map(place => place.description),
       data
@@ -66,12 +69,13 @@ class GooglePlaceAutocomplete extends Component {
     if(index === -1) {
       return false;
     }
+    const data = this.previousData || this.state.data;
 
-    this.props.onNewRequest(this.state.data[index], searchText, index);
+    this.props.onNewRequest(data[index], searchText, index);
   }
 
-  onInputChange(searchText) {
-    this.props.onChange({target: {value: searchText}});
+  onInputChange(searchText, dataSource, params) {
+    this.props.onChange({target: {value: searchText}}, dataSource, params);
   }
 
   render() {
