@@ -79,7 +79,7 @@ class GooglePlaceAutocomplete extends Component {
   }
 
   render() {
-    const {location, radius, bounds, ...autoCompleteProps} = this.props; // eslint-disable-line no-unused-vars
+    const {location, radius, bounds, types, ...autoCompleteProps} = this.props; // eslint-disable-line no-unused-vars
 
     return (
       <AutoComplete
