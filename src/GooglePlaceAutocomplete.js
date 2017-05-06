@@ -83,6 +83,7 @@ class GooglePlaceAutocomplete extends Component {
 
     return (
       <AutoComplete
+        openOnFocus={true}
         {...autoCompleteProps}
         ref={this.props.getRef}
         filter={this.props.filter}
