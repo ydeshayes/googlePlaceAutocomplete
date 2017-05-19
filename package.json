@@ -1,6 +1,6 @@
 {
   "name": "material-ui-places",
-  "version": "1.1.4",
+  "version": "1.1.5",
   "description": "Wrapper on top of the material-ui AutoComplete component that use google place api",
   "main": "lib/material-ui-places.min.js",
   "scripts": {
@@ -20,17 +20,18 @@
     "babel-preset-react": "^6.16.0",
     "babel-register": "^6.16.3",
     "chai": "3.5.0",
-    "enzyme": "^2.4.1",
+    "enzyme": "^2.8.2",
     "eslint": "3.16.1",
     "eslint-loader": "1.6.3",
     "eslint-plugin-react": "^6.4.1",
     "jsdom": "^9.6.0",
     "material-ui": "^0.17.0",
-    "react-tap-event-plugin": "^2.0.1",
     "mocha": "3.2.0",
-    "react": "^15.3.2",
-    "react-addons-test-utils": "^15.3.2",
-    "react-dom": "^15.3.2",
+    "prop-types": "^15.5.10",
+    "react": "^15.5.4",
+    "react-dom": "^15.5.4",
+    "react-tap-event-plugin": "^2.0.1",
+    "react-test-renderer": "^15.5.4",
     "sinon": "^1.17.6",
     "webpack": "2.2.1",
     "yargs": "6.6.0"
@@ -54,7 +55,5 @@
   "bugs": {
     "url": "https://github.com/ydeshayes/googlePlaceAutocomplete/issues"
   },
-  "homepage": "https://github.com/ydeshayes/googlePlaceAutocomplete",
-  "dependencies": {
-  }
+  "homepage": "https://github.com/ydeshayes/googlePlaceAutocomplete"
 }

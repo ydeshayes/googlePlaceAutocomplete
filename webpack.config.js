@@ -25,7 +25,8 @@ var config = {
   },
   externals: {
     'react': 'react',
-    'material-ui': 'material-ui'
+    'material-ui': 'material-ui',
+    'prop-types': 'prop-types'
   },
   module: {
     rules: [

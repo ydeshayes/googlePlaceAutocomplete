@@ -1,9 +1,10 @@
 /* global google*/
 
-import React, { Component } from 'react';
+import React from 'react';
 import { AutoComplete } from 'material-ui';
+import PropTypes from 'prop-types';
 
-class GooglePlaceAutocomplete extends Component {
+class GooglePlaceAutocomplete extends React.Component {
   constructor(props) {
     super(props);
     this.autocompleteService = new google.maps.places.AutocompleteService();
@@ -96,13 +97,13 @@ class GooglePlaceAutocomplete extends Component {
 }
 
 GooglePlaceAutocomplete.propTypes = {
-  location: React.PropTypes.object,
-  radius: React.PropTypes.number,
-  onNewRequest: React.PropTypes.func.isRequired,
-  onChange: React.PropTypes.func.isRequired,
-  getRef: React.PropTypes.func,
-  types: React.PropTypes.arrayOf(React.PropTypes.string),
-  bounds: React.PropTypes.object
+  location: PropTypes.object,
+  radius: PropTypes.number,
+  onNewRequest: PropTypes.func.isRequired,
+  onChange: PropTypes.func.isRequired,
+  getRef: PropTypes.func,
+  types: PropTypes.arrayOf(PropTypes.string),
+  bounds: PropTypes.object
 };
 
 GooglePlaceAutocomplete.defaultProps = {
