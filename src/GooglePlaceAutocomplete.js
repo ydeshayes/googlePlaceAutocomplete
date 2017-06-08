@@ -62,6 +62,10 @@ class GooglePlaceAutocomplete extends React.Component {
       bounds: this.getBounds()
     };
 
+    if(this.props.restrictions) {
+      request.componentRestrictions = { country: this.props.restrictions };
+    }
+
     this.autocompleteService.getPlacePredictions(request, data => this.updateDatasource(data));
   }
 
@@ -80,7 +84,9 @@ class GooglePlaceAutocomplete extends React.Component {
   }
 
   render() {
-    const {location, radius, bounds, types, ...autoCompleteProps} = this.props; // eslint-disable-line no-unused-vars
+    const {
+      location, radius, bounds, types, restrictions, ...autoCompleteProps // eslint-disable-line no-unused-vars
+    } = this.props;
 
     return (
       <AutoComplete
@@ -103,7 +109,11 @@ GooglePlaceAutocomplete.propTypes = {
   onChange: PropTypes.func.isRequired,
   getRef: PropTypes.func,
   types: PropTypes.arrayOf(PropTypes.string),
-  bounds: PropTypes.object
+  bounds: PropTypes.object,
+  restrictions: PropTypes.oneOfType([
+    PropTypes.string,
+    PropTypes.arrayOf(PropTypes.string)
+  ])
 };
 
 GooglePlaceAutocomplete.defaultProps = {

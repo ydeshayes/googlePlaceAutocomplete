@@ -53,6 +53,9 @@ Material-ui is required:
 * types: Array, ```
 The types of predictions to be returned. Four types are supported: 'establishment' for businesses, 'geocode' for addresses, '(regions)' for administrative regions and '(cities)' for localities. If nothing is specified, all types are returned.```, default ```undefined```
 
+* restrictions: Array|String, ```[ 'fr', 'gb'] | 'gb'```
+Restricts predictions to the specified country (ISO 3166-1 Alpha-2 country code, case insensitive). E.g., us, br, au. You can provide a single one, or an array of up to 5 country code strings. See [ComponentRestrictions](https://developers.google.com/maps/documentation/javascript/reference#ComponentRestrictions)
+
 ## Development
 
 * `npm run build` - produces production version

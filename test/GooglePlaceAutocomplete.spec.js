@@ -48,4 +48,25 @@ describe('<GooglePlaceAutocomplete />', () => {
                           />);
   });
 
+  it('Accepts country restrictions', () => {
+    sinon.spy(AutocompleteService.prototype, 'getPlacePredictions');
+    const onNewRequest = sinon.spy();
+
+    const onChange = sinon.spy();
+
+    let wrapper = shallow(<GooglePlaceAutocomplete
+                            onNewRequest={onNewRequest}
+                            onChange={onChange}
+                            searchText=""
+                            restrictions={['France']}
+                            name={'location'}
+                          />);
+
+    wrapper.setProps({ searchText: 'test' });
+
+    expect(AutocompleteService.prototype.getPlacePredictions.calledOnce).to.be.true;
+    expect(AutocompleteService.prototype.getPlacePredictions.args[0][0]).to.have.property('componentRestrictions');
+
+    AutocompleteService.prototype.getPlacePredictions.restore();
+  });
 });
