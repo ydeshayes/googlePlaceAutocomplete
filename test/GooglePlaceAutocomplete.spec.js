@@ -9,31 +9,30 @@ import AutocompleteService from './MockAutoCompleteService';
 import GooglePlaceAutocomplete from '../src';
 
 describe('<GooglePlaceAutocomplete />', () => {
-  before(function() {
+  before(function () {
     global.google = {
       maps: {
-    		LatLng: function(lat, lng) {
-    			return {
-    				latitude: parseFloat(lat),
-    				longitude: parseFloat(lng),
+        LatLng: function (lat, lng) {
+          return {
+            latitude: parseFloat(lat),
+            longitude: parseFloat(lng),
 
-    				lat: function() { return this.latitude; },
-    				lng: function() { return this.longitude; }
-    			};
-    		},
-    		LatLngBounds: function(ne, sw) {
-    			return {
-    				getSouthWest: function() { return sw; },
-    				getNorthEast: function() { return ne; }
-    			};
-    		},
+            lat: function () { return this.latitude; },
+            lng: function () { return this.longitude; }
+          };
+        },
+        LatLngBounds: function (ne, sw) {
+          return {
+            getSouthWest: function () { return sw; },
+            getNorthEast: function () { return ne; }
+          };
+        },
         places: {
           AutocompleteService
         }
-  		}
-    }
-	});
-
+      }
+    };
+  });
 
   it('Render GooglePlaceAutocomplete', () => {
 

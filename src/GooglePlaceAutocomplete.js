@@ -15,7 +15,7 @@ class GooglePlaceAutocomplete extends React.Component {
   }
 
   componentWillReceiveProps(nextProps) {
-    if(this.props.searchText !== nextProps.searchText) {
+    if (this.props.searchText !== nextProps.searchText) {
       this.onUpdateInput(nextProps.searchText, this.state.dataSource);
       this.onInputChange(nextProps.searchText);
     }
