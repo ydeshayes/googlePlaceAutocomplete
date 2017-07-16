@@ -57,7 +57,7 @@ describe('<GooglePlaceAutocomplete />', () => {
                             onNewRequest={onNewRequest}
                             onChange={onChange}
                             searchText=""
-                            restrictions={['France']}
+                            restrictions={{ country: ['France'] }}
                             name={'location'}
                           />);
 
@@ -65,6 +65,7 @@ describe('<GooglePlaceAutocomplete />', () => {
 
     expect(AutocompleteService.prototype.getPlacePredictions.calledOnce).to.be.true;
     expect(AutocompleteService.prototype.getPlacePredictions.args[0][0]).to.have.property('componentRestrictions');
+    expect(AutocompleteService.prototype.getPlacePredictions.args[0][0].componentRestrictions).to.have.property('country').that.includes('France');
 
     AutocompleteService.prototype.getPlacePredictions.restore();
   });
