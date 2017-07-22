@@ -15,18 +15,18 @@ class GooglePlaceAutocomplete extends React.Component {
   }
 
   componentWillReceiveProps(nextProps) {
-    if(this.props.searchText !== nextProps.searchText) {
+    if (this.props.searchText !== nextProps.searchText) {
       this.onUpdateInput(nextProps.searchText, this.state.dataSource);
       this.onInputChange(nextProps.searchText);
     }
   }
 
   updateDatasource(data) {
-    if(!data || !data.length) {
+    if (!data || !data.length) {
       return false;
     }
 
-    if(this.state.data) {
+    if (this.state.data) {
       this.previousData = { ...this.state.data };
     }
     this.setState({
@@ -36,11 +36,11 @@ class GooglePlaceAutocomplete extends React.Component {
   }
 
   getBounds() {
-    if(!this.props.bounds || (!this.props.bounds.ne && !this.props.bounds.south)) {
+    if (!this.props.bounds || (!this.props.bounds.ne && !this.props.bounds.south)) {
       return undefined;
     }
 
-    if(this.props.bounds.ne && this.props.bounds.sw) {
+    if (this.props.bounds.ne && this.props.bounds.sw) {
       return new google.maps.LatLngBounds(this.props.bounds.sw, this.props.bounds.ne);
     }
 
@@ -62,12 +62,16 @@ class GooglePlaceAutocomplete extends React.Component {
       bounds: this.getBounds()
     };
 
+    if (this.props.restrictions) {
+      request.componentRestrictions = { ...this.props.restrictions };
+    }
+
     this.autocompleteService.getPlacePredictions(request, data => this.updateDatasource(data));
   }
 
   onNewRequest(searchText, index) {
     // The index in dataSource of the list item selected, or -1 if enter is pressed in the TextField
-    if(index === -1) {
+    if (index === -1) {
       return false;
     }
     const data = this.previousData || this.state.data;
@@ -80,7 +84,9 @@ class GooglePlaceAutocomplete extends React.Component {
   }
 
   render() {
-    const {location, radius, bounds, types, ...autoCompleteProps} = this.props; // eslint-disable-line no-unused-vars
+    const {
+      location, radius, bounds, types, restrictions, ...autoCompleteProps // eslint-disable-line no-unused-vars
+    } = this.props;
 
     return (
       <AutoComplete
@@ -103,7 +109,13 @@ GooglePlaceAutocomplete.propTypes = {
   onChange: PropTypes.func.isRequired,
   getRef: PropTypes.func,
   types: PropTypes.arrayOf(PropTypes.string),
-  bounds: PropTypes.object
+  bounds: PropTypes.object,
+  restrictions: PropTypes.shape({
+    country: PropTypes.oneOfType([
+      PropTypes.string,
+      PropTypes.arrayOf(PropTypes.string)
+    ])
+  })
 };
 
 GooglePlaceAutocomplete.defaultProps = {

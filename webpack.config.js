@@ -37,7 +37,7 @@ var config = {
       },
       {
         test: /(\.jsx|\.js)$/,
-        use: "eslint-loader",
+        use: 'eslint-loader',
         exclude: /node_modules/
       }
     ]
