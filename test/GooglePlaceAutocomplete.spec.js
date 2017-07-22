@@ -5,7 +5,7 @@ import React from 'react';
 import { expect } from 'chai';
 import { shallow } from 'enzyme';
 
-import AutocompleteService from './MockAutoCompleteService';
+import AutocompleteService from './MockAutocompleteService';
 import GooglePlaceAutocomplete from '../src';
 
 describe('<GooglePlaceAutocomplete />', () => {
