@@ -1,3 +1,4 @@
+[![Build Status](https://travis-ci.org/ydeshayes/googlePlaceAutocomplete.svg?branch=master)](https://travis-ci.org/ydeshayes/googlePlaceAutocomplete)
 # material-ui-places component for ReactJS
 
 Wrapper on top of the material-ui AutoComplete component that use google place api
