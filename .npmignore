@@ -3,3 +3,4 @@ test
 webpack.*
 .babelrc
 .eslintrc
+.travis.yml
