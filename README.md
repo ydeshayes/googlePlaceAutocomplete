@@ -43,6 +43,8 @@ Material-ui is required:
 
 * onNewRequest: function -> (selectedData, searchedText, selectedDataIndex)
 
+* onChange: function -> ({target: {value: searchText}}, dataSource, params)
+
 * location: {lat: latitude, lng: longitude}, default: ```{lat: 0, lng: 0}``` see [LatLng](https://developers.google.com/maps/documentation/javascript/reference?hl=fr#LatLng)
 
 * radius: number, default: ```0```
