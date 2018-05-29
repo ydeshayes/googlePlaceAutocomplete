@@ -111,7 +111,7 @@ export class GoogleAddress extends React.Component {
 
     this.autocompleteService.getPlacePredictions(request, resp => {
       this.setState({
-        suggestions: resp.map(place => ({label: place.description}))
+        suggestions: (resp || []).map(place => ({label: place.description}))
       })
     });
   }
