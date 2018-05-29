@@ -30,22 +30,23 @@ Material-ui is required:
 
 
 ```jsx
-<GooglePlaceAutocomplete
-  searchText={'paris'}
-  onChange={onAutoCompleteInputChangeFct}
-  onNewRequest={onClickLocationFct}
-  name={'location'}
+<GoogleAddress
+  placeholder="Address"
+  value={this.state.value}
+  onChange={this.handleChange}
+  onSuggestionSelected={this.addAddress}
+  types={['address']}
+  location={{lat: '35.9981298', lng: '-83.9541637'}}
 />
 ```
 ### Props:
 
-* [Same as AutoComplete material-ui component](http://www.material-ui.com/#/components/auto-complete)
+* onChange: a function to run when the input value is changed (aside from the regular fetching suggestions)
 
-* onNewRequest: function -> (selectedData, searchedText, selectedDataIndex)
+* value: You can use this if you want to set the input value yourself, combined with on change. You can use this for example if you want to clear the input after the users picks a selection (see example below)
 
-* onChange: function -> ({target: {value: searchText}}, dataSource, params)
 
-* location: {lat: latitude, lng: longitude}, default: ```{lat: 0, lng: 0}``` see [LatLng](https://developers.google.com/maps/documentation/javascript/reference?hl=fr#LatLng)
+* location: This will tell google where to bias the location results, to return more likely places {lat: latitude, lng: longitude}, default: ```{lat: 0, lng: 0}``` see [LatLng](https://developers.google.com/maps/documentation/javascript/reference?hl=fr#LatLng)
 
 * radius: number, default: ```0```
 
@@ -58,6 +59,53 @@ The types of predictions to be returned. Four types are supported: 'establishmen
 
 * restrictions: ```country:  Array|String```, ```{ country: [ 'fr', 'gb'] | 'gb' }```
 Restricts predictions to the specified country (ISO 3166-1 Alpha-2 country code, case insensitive). E.g., us, br, au. You can provide a single one, or an array of up to 5 country code strings. See [ComponentRestrictions](https://developers.google.com/maps/documentation/javascript/reference#ComponentRestrictions)
+
+### Example
+```js
+import { Button } from '@material-ui/core';
+import React from 'react';
+
+import { GoogleAddress } from '../components/google-address';
+
+export class UserAccount extends React.Component {
+  addAddress = description => {
+    fetch('/add-address', {
+      headers: {
+        ['Content-Type']: 'text/plain'
+      },
+      credentials: 'same-origin',
+      method: 'POST',
+      body: description,
+    })
+    this.setState({
+      value: ''
+    })
+  }
+  handleChange = e => {
+    this.setState({
+      value: e.target.value
+    })
+  }
+  state = {
+    value: ''
+  }
+  render() {
+    return <div>
+      <h1>Account Info</h1>
+      <GoogleAddress
+        placeholder="Address"
+        value={this.state.value}
+        onChange={this.handleChange}
+        onSuggestionSelected={this.addAddress}
+        types={['address']}
+        location={{lat: '35.9981298', lng: '-83.9541637'}}
+      />
+      <Button onClick={this.verify_address}>Add Address</Button>
+    </div>
+  }
+}
+```
+
 
 ## Development
 
